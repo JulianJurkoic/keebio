@@ -23,8 +23,13 @@ enum layers {
 #define O_SFT   RSFT_T(KC_O)
 #define SCLN_SFT RSFT_T(KC_SCLN)
 
-// ZMK &kp C_VOICE_COMMAND
-#define VOICE   KC_ASSISTANT
+// Dictation. QMK has no keycode for Apple's F5 mic key -- that is a vendor-
+// specific HID usage only Apple keyboards emit -- and KC_ASSISTANT (consumer
+// usage 0x1CB) is a different feature that macOS ignores. So we send a key
+// macOS can bind instead: set System Settings -> Keyboard -> Dictation ->
+// Shortcut -> Customize to F13. MacBooks have no physical F13, so nothing
+// else collides with it.
+#define VOICE   KC_F13
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 

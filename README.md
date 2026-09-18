@@ -30,7 +30,6 @@ of all four layers are a literal transcription:
 | `&mt LALT A` / `&mt LSHFT T` / `&mt RSHFT N` | `LALT_T(KC_A)` / `LSFT_T(KC_T)` / `RSFT_T(KC_N)` |
 | `&mo 1` / `&to N` | `MO(_FN)` / `TO(N)` |
 | `&none` / `&trans` | `XXXXXXX` / `_______` |
-| `&kp C_VOICE_COMMAND` | `KC_ASSISTANT` |
 | `&mt` timings | `TAPPING_TERM 200`, `QUICK_TAP_TERM 100`, `FLOW_TAP_TERM 150` (`config.h`) |
 
 ZMK's `tap-preferred` flavor is QMK's default hold resolution, so
@@ -55,6 +54,20 @@ base, `TO(0)` on FN, `TO(1)` on QWERTY. On the gaming layer the left thumbs are
 Shift sits on the index-1 key of each home row: `A` on the left, and the
 mirrored right-hand key -- `O` in Colemak, `;` in QWERTY (same physical switch).
 Alt is no longer a home-row mod; it moved to the two inner thumb keys.
+
+## Dictation (the VOICE thumb key)
+
+The ZMK config used `&kp C_VOICE_COMMAND`. There is no QMK equivalent that
+macOS acts on: Apple's F5 mic key is a vendor-specific HID usage only Apple
+keyboards emit, and QMK's `KC_ASSISTANT` (consumer usage `0x1CB`) is a
+different feature macOS ignores.
+
+So `VOICE` sends **F13** instead. To hook it up:
+
+    System Settings -> Keyboard -> Dictation -> Shortcut -> Customize... -> F13
+
+MacBooks have no physical F13, so nothing else collides with it. To use a
+different key, change the `VOICE` define at the top of `keymap.c`.
 
 ## Dropped, no Iris/QMK equivalent
 
