@@ -4,6 +4,10 @@
 // are a literal transcription. Only the thumb clusters differ: the Charybdis
 // has 5 left / 3 right thumbs, the Iris has 3 thumbs + 1 inner key per side.
 // See README.md for the thumb mapping and the ZMK features that were dropped.
+//
+// This board has no trackball and no encoders, so the Charybdis' mouse buttons
+// and scroll encoders are omitted entirely. XXXXXXX marks a thumb slot that is
+// free as a result.
 
 #include QMK_KEYBOARD_H
 
@@ -29,8 +33,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                        KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS,
         KC_TAB,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,                        KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_BSPC,
         KC_ESC,  A_ALT,   KC_R,    KC_S,    T_SFT,   KC_G,                        KC_M,    N_SFT,   KC_E,    KC_I,    KC_O,    KC_QUOT,
-        KC_LCTL, KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,    KC_BTN2,   KC_LALT, KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_SLSH, KC_DEL,
-                                   KC_LGUI, KC_BTN1, MO(_FN),                     KC_SPC,  KC_ENT,  VOICE
+        KC_LCTL, KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,    XXXXXXX,   KC_LALT, KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_SLSH, KC_DEL,
+                                   KC_LGUI, VOICE,   MO(_FN),                     KC_SPC,  KC_ENT,  XXXXXXX
     ),
 
     /* layer_1 */
@@ -38,8 +42,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         XXXXXXX, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                       KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_EQL,
         XXXXXXX, TO(2),   KC_7,    KC_8,    KC_9,    TO(3),                       QK_BOOT, KC_EQL,  KC_BSLS, KC_LBRC, KC_RBRC, KC_BSPC,
         XXXXXXX, KC_0,    KC_4,    KC_5,    KC_6,    XXXXXXX,                     XXXXXXX, KC_DOWN, KC_UP,   KC_LEFT, KC_RGHT, XXXXXXX,
-        XXXXXXX, XXXXXXX, KC_1,    KC_2,    KC_3,    XXXXXXX, KC_BTN2,   KC_LALT, XXXXXXX, XXXXXXX, KC_DOT,  KC_RBRC, XXXXXXX, KC_DEL,
-                                   KC_LGUI, KC_BTN1, TO(0),                       KC_SPC,  KC_ENT,  VOICE
+        XXXXXXX, XXXXXXX, KC_1,    KC_2,    KC_3,    XXXXXXX, XXXXXXX,   KC_LALT, XXXXXXX, XXXXXXX, KC_DOT,  KC_RBRC, XXXXXXX, KC_DEL,
+                                   KC_LGUI, VOICE,   TO(0),                       KC_SPC,  KC_ENT,  XXXXXXX
     ),
 
     /* layer_2 */
@@ -47,8 +51,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                        KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS,
         KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    T_SFT,                       KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
         KC_ESC,  A_ALT,   KC_S,    KC_D,    KC_F,    KC_G,                        KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
-        KC_LCTL, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_BTN2,   KC_LALT, N_SFT,   KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_DEL,
-                                   KC_LGUI, KC_BTN1, TO(1),                       KC_SPC,  KC_ENT,  VOICE
+        KC_LCTL, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    XXXXXXX,   KC_LALT, N_SFT,   KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_DEL,
+                                   KC_LGUI, VOICE,   TO(1),                       KC_SPC,  KC_ENT,  XXXXXXX
     ),
 
     /* layer_3 - FPS gaming */
@@ -56,17 +60,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                        _______, _______, _______, _______, _______, _______,
         KC_TAB,  KC_Q,    KC_F,    KC_W,    KC_P,    KC_B,                        _______, _______, _______, _______, _______, _______,
         KC_ESC,  KC_LSFT, KC_A,    KC_S,    KC_D,    KC_G,                        _______, _______, _______, _______, _______, _______,
-        KC_LALT, KC_LCTL, KC_X,    KC_C,    KC_V,    KC_Z,    KC_BTN3,   _______, _______, _______, _______, _______, _______, _______,
+        KC_LALT, KC_LCTL, KC_X,    KC_C,    KC_V,    KC_Z,    XXXXXXX,   _______, _______, _______, _______, _______, _______, _______,
                                    KC_R,    KC_SPC,  KC_E,                        _______, KC_ENT,  TO(0)
     ),
 };
-
-#ifdef ENCODER_MAP_ENABLE
-// ZMK scroll_vertical_encoder (left) and scroll_horizontal_encoder (right).
-const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
-    [_BASE]   = { ENCODER_CCW_CW(KC_WH_U, KC_WH_D), ENCODER_CCW_CW(KC_WH_R, KC_WH_L) },
-    [_FN]     = { ENCODER_CCW_CW(_______, _______), ENCODER_CCW_CW(_______, _______) },
-    [_QWERTY] = { ENCODER_CCW_CW(KC_WH_U, KC_WH_D), ENCODER_CCW_CW(KC_WH_R, KC_WH_L) },
-    [_GAME]   = { ENCODER_CCW_CW(KC_WH_U, KC_WH_D), ENCODER_CCW_CW(KC_WH_R, KC_WH_L) },
-};
-#endif

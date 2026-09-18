@@ -29,7 +29,6 @@ of all four layers are a literal transcription:
 | `&kp X` | `KC_X` |
 | `&mt LALT A` / `&mt LSHFT T` / `&mt RSHFT N` | `LALT_T(KC_A)` / `LSFT_T(KC_T)` / `RSFT_T(KC_N)` |
 | `&mo 1` / `&to N` | `MO(_FN)` / `TO(N)` |
-| `&mkp MB1/MB2/MB3` | `KC_BTN1` / `KC_BTN2` / `KC_BTN3` |
 | `&none` / `&trans` | `XXXXXXX` / `_______` |
 | `&kp C_VOICE_COMMAND` | `KC_ASSISTANT` |
 | `&mt` timings | `TAPPING_TERM 200`, `QUICK_TAP_TERM 100`, `FLOW_TAP_TERM 150` (`config.h`) |
@@ -42,29 +41,29 @@ ZMK's `tap-preferred` flavor is QMK's default hold resolution, so
 This is the part that could not be transcribed. The Charybdis has **5 left / 3
 right** thumb keys; the Iris has **3 thumbs + 1 inner key** per half (4 + 4).
 
-Current placement on the base layer:
+Dropping the Charybdis' two left-thumb mouse buttons brought the left hand down
+to three keys, which happens to fit the Iris' three thumbs exactly:
 
 ```
-left:   LGUI   BTN1   MO(FN)        + inner key (next to B): BTN2
-right:  SPC    ENT    ASSISTANT     + inner key (next to K): LALT
+left:   LGUI   ASSISTANT   MO(FN)     + inner key (next to B): free
+right:  SPC    ENT         free       + inner key (next to K): LALT
 ```
 
-Every Charybdis thumb key survived the move — the Iris' spare right thumb
-absorbed the displaced `C_VOICE_COMMAND` — but the *positions* are a guess and
-the physical arc is a different shape. Retune `keymap.c` once you have typed on it.
-
-Also note the Iris has no trackball, so `BTN1`/`BTN2`/`BTN3` are only useful
-alongside a separate mouse; they are kept for parity and are the obvious
-candidates to reclaim.
+The two `XXXXXXX` slots are deliberately empty rather than invented — they are
+yours to assign. The occupied positions are a guess at the Iris' differently
+shaped thumb arc; retune `keymap.c` once you have typed on it.
 
 ## Dropped, no Iris/QMK equivalent
 
+- **Mouse** — this Iris has no trackball, so `&mkp MB1/MB2/MB3` are gone rather
+  than mapped to `KC_BTN*`. `MOUSEKEY_ENABLE` is off and there is no `rules.mk`.
+- **Encoders** — not installed on this board, so the ZMK `scroll_vertical_encoder`
+  / `scroll_horizontal_encoder` sensor bindings are dropped and `ENCODER_MAP` is
+  off. (The Rev. 5 supports one encoder per half if you ever add them.)
+- **Trackball tuning** — `&mmv` / `&msc` acceleration, `zip_xy_scaler`, and the
+  input listeners go with the trackball.
 - **Bluetooth** — `&bt BT_SEL 0..3` on the layer-1 outer column became `XXXXXXX`;
   the Iris Rev. 5 is wired. `&bt BT_CLR` became `QK_BOOT`, which is genuinely
   useful there for flashing.
-- **Trackball tuning** — `&mmv` / `&msc` acceleration, `zip_xy_scaler`, and the
-  input listeners have no analogue. The two ZMK scroll encoders are mapped to the
-  Iris Rev. 5 encoders via `ENCODER_MAP`: left = vertical wheel, right = horizontal.
-  (Harmless if you have no encoders installed.)
 - The commented-out `Mouse` / `layer_4` / `layer_5` blocks in the ZMK config were
   not ported.
