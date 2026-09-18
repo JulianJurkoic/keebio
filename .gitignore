@@ -1,0 +1,5 @@
+# Build artifacts dropped here by `qmk compile`
+*.hex
+*.bin
+*.uf2
+.build/
