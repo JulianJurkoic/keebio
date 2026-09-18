@@ -36,22 +36,25 @@ of all four layers are a literal transcription:
 ZMK's `tap-preferred` flavor is QMK's default hold resolution, so
 `PERMISSIVE_HOLD` / `HOLD_ON_OTHER_KEY_PRESS` are intentionally *not* set.
 
-## Thumb clusters — needs tweaking
+## Thumb clusters
 
-This is the part that could not be transcribed. The Charybdis has **5 left / 3
-right** thumb keys; the Iris has **3 thumbs + 1 inner key** per half (4 + 4).
-
-Dropping the Charybdis' two left-thumb mouse buttons brought the left hand down
-to three keys, which happens to fit the Iris' three thumbs exactly:
+Laid out for the Iris rather than mirroring the Charybdis (5 left / 3 right
+thumbs there, 3 thumbs + 1 inner key per half here):
 
 ```
-left:   LGUI   ASSISTANT   MO(FN)     + inner key (next to B): free
-right:  SPC    ENT         free       + inner key (next to K): LALT
+left   (L->R):  VOICE   GUI   MO(FN)      + inner/upper-right key: LALT
+right  (L->R):  ENT     SPC   <free>      + inner/upper-left  key: LALT
 ```
 
-The two `XXXXXXX` slots are deliberately empty rather than invented — they are
-yours to assign. The occupied positions are a guess at the Iris' differently
-shaped thumb arc; retune `keymap.c` once you have typed on it.
+Both inner keys are Alt. The layer key is the third left thumb: `MO(FN)` on
+base, `TO(0)` on FN, `TO(1)` on QWERTY. On the gaming layer the left thumbs are
+`R` / `SPC` / `E` and the free right slot holds `TO(0)` as the escape hatch.
+
+## Home-row mods
+
+Shift sits on the index-1 key of each home row: `A` on the left, and the
+mirrored right-hand key -- `O` in Colemak, `;` in QWERTY (same physical switch).
+Alt is no longer a home-row mod; it moved to the two inner thumb keys.
 
 ## Dropped, no Iris/QMK equivalent
 
